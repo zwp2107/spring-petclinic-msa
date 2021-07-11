@@ -34,7 +34,7 @@ public class CloudGatewayApplication {
 
         int availableCores = Runtime.getRuntime().availableProcessors();
 
-        logger.info("========================== System Info ==========================");
+        logger.info("========================== System Info !==========================");
         logger.info("Java version: " + System.getProperty("java.vendor") + " " + System.getProperty("java.version"));
         logger.info("Operating system: " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
         logger.info("CPU Cores: " + availableCores);
