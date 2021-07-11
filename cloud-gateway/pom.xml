@@ -6,7 +6,7 @@
 	<groupId>com.spring2go.samples.petclinic.gateway</groupId>
 	<artifactId>spring-petclinic-cloud-gateway</artifactId>
 	<packaging>jar</packaging>
-	<description>Spring2Go PetClinic Cloud Gateway</description>
+	<description>Spring2Go PetClinic Cloud Gateway </description>
 
     <!--for testing circleci 7-->
 
