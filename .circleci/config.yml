@@ -15,8 +15,8 @@ jobs:
             while read project; do
               if grep -Fxq $project project-dirs; then
                 printf "\nTriggerring build for project: "$project
-                printf "\n CIRCLE_PROJECT_USERNAME: $CIRCLE_PROJECT_USERNAME ${CIRCLE_TOKEN}: -d build_parameters[CIRCLE_JOB]=${project} https://circleci.com/api/v2/project/github/zwp2107/$CIRCLE_PROJECT_REPONAME"
-                curl -s -u ${CIRCLE_TOKEN}: -d build_parameters[CIRCLE_JOB]=${project} https://circleci.com/api/v2/project/github/zwp2107/$CIRCLE_PROJECT_REPONAME
+                printf "\n CIRCLE_PROJECT_USERNAME: $CIRCLE_PROJECT_USERNAME ${CIRCLE_TOKEN}: -d build_parameters[CIRCLE_JOB]=${project} https://circleci.com/api/v2/project/github/${GITHUB_USER}/$CIRCLE_PROJECT_REPONAME"
+                curl -s -u ${CIRCLE_TOKEN}: -d build_parameters[CIRCLE_JOB]=${project} https://circleci.com/api/v2/project/github/${GITHUB_USER}/$CIRCLE_PROJECT_REPONAME
               fi
             done < projects
   cloud-gateway:
