@@ -16,7 +16,7 @@ jobs:
               if grep -Fxq $project project-dirs; then
                 printf "\nTriggerring build for project: "$project
                 printf "\n curl -s  -d build_parameters[CIRCLE_JOB]=${project} https://circleci.com/api/v2/project/github/zwp2107/spring-petclinic-msa"
-                curl -s  -d build_parameters[CIRCLE_JOB]=${project} https://circleci.com/api/v2/project/github/zwp2107/spring-petclinic-msa
+                curl -s https://circleci.com/api/v2/project/github/zwp2107/spring-petclinic-msa
               fi
             done < projects
   cloud-gateway:
