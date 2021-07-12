@@ -9,50 +9,47 @@ jobs:
       - run:
           name: Determine which directories have changed
           command: |
-            git diff --no-commit-id --name-only -r `git log -n 2 --oneline --pretty=format:"%h" | tail -n1` | cut -d/ -f1 | sort -u >  projects
-            printf "Modified directories:\n"
-            cat projects
-            while read project; do
-              if grep -Fxq $project project-dirs; then
-                printf "\nTriggerring build for project: "$project
-                curl -s https://circleci.com/api/v2/project/github/zwp2107/spring-petclinic-msa
-              fi
-            done < projects
+            echo "Determine which directories have changed"
   cloud-gateway:
     docker:
       - image: circleci/openjdk:8u242-jdk
-    working_directory: ~/spring-petclinic-msa/cloud-gateway
     steps:
-      - build-service:
-          service-name: "cloud-gateway"
+      - run:
+          name: cloud-gateway have changed
+          command: |
+            echo "cloud-gateway have changed"
   customers-service:
     docker:
       - image: circleci/openjdk:8u242-jdk
-    working_directory: ~/spring-petclinic-msa/customers-service
     steps:
-      - build-service:
-          service-name: "customers-service"
+      - run:
+          name: customers-service have changed
+          command: |
+            echo "customers-service have changed"
   vets-service:
     docker:
       - image: circleci/openjdk:8u242-jdk
-    working_directory: ~/spring-petclinic-msa/vets-service
     steps:
-      - build-service:
-          service-name: "vets-service"
+      - run:
+          name: vets-service have changed
+          command: |
+            echo "vets-service have changed"
   visits-service:
     docker:
       - image: circleci/openjdk:8u242-jdk
-    working_directory: ~/spring-petclinic-msa/visits-service
     steps:
-      - build-service:
-          service-name: "visits-service"
+      - run:
+          name: visits-service have changed
+          command: |
+            echo "visits-service have changed"
   web-app:
     docker:
       - image: circleci/openjdk:8u242-jdk
-    working_directory: ~/spring-petclinic-msa/web-app
     steps:
-      - build-service:
-          service-name: "web-app"
+      - run:
+          name: web-app have changed
+          command: |
+            echo "web-app have changed"
 
 commands:
   build-service:
