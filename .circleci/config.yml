@@ -15,7 +15,6 @@ jobs:
             while read project; do
               if grep -Fxq $project project-dirs; then
                 printf "\nTriggerring build for project: "$project
-                printf "\n curl -s  -d build_parameters[CIRCLE_JOB]=${project} https://circleci.com/api/v2/project/github/zwp2107/spring-petclinic-msa"
                 curl -s https://circleci.com/api/v2/project/github/zwp2107/spring-petclinic-msa
               fi
             done < projects
@@ -70,7 +69,7 @@ commands:
 
       - run:
           name: Login to Dockerhub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+          command: docker login -u zwp2107 -p zwp610315
 
       # Download and cache dependencies
       - restore_cache:
