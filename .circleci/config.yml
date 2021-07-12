@@ -70,7 +70,7 @@ commands:
 
       - run:
           name: Login to Dockerhub
-          command: docker login -u zwp2107 -p zwp610315
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
 
       # Download and cache dependencies
       - restore_cache:
