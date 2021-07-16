@@ -51,6 +51,7 @@ jobs:
       - image: circleci/openjdk:8u242-jdk
     working_directory: ~/spring-petclinic-msa/web-app
     steps:
+      - run: echo "web-app"
       - build-service:
           service-name: "web-app"
 
