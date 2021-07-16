@@ -1,28 +1,38 @@
-version: 2.1
-
+version: 2
 jobs:
-  cloud-gateway:
+  one:
     docker:
-      - image: circleci/openjdk:8u242-jdk
+      - image: circleci/ruby:2.4.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - run: echo "cloud-gateway"
-  customers-service:
+      - checkout
+      - run: echo "A first hello"
+      - run: mkdir -p my_workspace
+      - run: echo "Trying out workspaces" > my_workspace/echo-output
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory
+          root: my_workspace
+          # Must be relative path from root
+          paths:
+            - echo-output
+  two:
     docker:
-      - image: circleci/openjdk:8u242-jdk
+      - image: circleci/ruby:2.4.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - run: echo " customers-service"
-  vets-service:
-    docker:
-      - image: circleci/openjdk:8u242-jdk
-    steps:
-      - run: echo " vets-service"
-  visits-service:
-    docker:
-      - image: circleci/openjdk:8u242-jdk
-    steps:
-      - run: echo "visits-service"
-  web-app:
-    docker:
-      - image: circleci/openjdk:8u242-jdk
-    steps:
-      - run: echo " web-app"
+      - checkout
+      - run: echo "A more familiar hi"
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: my_workspace
+
+      - run: |
+          if [[ $(cat my_workspace/echo-output) == "Trying out workspaces" ]]; then
+            echo "It worked!";
+          else
+            echo "Nope!"; exit 1
+          fi
