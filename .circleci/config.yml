@@ -1,88 +1,28 @@
 version: 2.1
 
 jobs:
-  build:
-    docker:
-      - image: circleci/openjdk:8u242-jdk
-    steps:
-      - checkout
-      - run: echo "build"
   cloud-gateway:
     docker:
       - image: circleci/openjdk:8u242-jdk
-    working_directory: ~/spring-petclinic-msa/cloud-gateway
     steps:
       - run: echo "cloud-gateway"
-      - build-service:
-          service-name: "cloud-gateway"
   customers-service:
     docker:
       - image: circleci/openjdk:8u242-jdk
-    working_directory: ~/spring-petclinic-msa/customers-service
     steps:
       - run: echo " customers-service"
-      - build-service:
-          service-name: "customers-service"
   vets-service:
     docker:
       - image: circleci/openjdk:8u242-jdk
-    working_directory: ~/spring-petclinic-msa/vets-service
     steps:
       - run: echo " vets-service"
-      - build-service:
-          service-name: "vets-service"
   visits-service:
     docker:
       - image: circleci/openjdk:8u242-jdk
-    working_directory: ~/spring-petclinic-msa/visits-service
     steps:
       - run: echo "visits-service"
-      - build-service:
-          service-name: "visits-service"
   web-app:
     docker:
       - image: circleci/openjdk:8u242-jdk
-    working_directory: ~/spring-petclinic-msa/web-app
     steps:
-      - build-service:
-          service-name: "web-app"
-
-commands:
-  build-service:
-    description: "Build a service and push image to dockerhub"
-    parameters:
-      service-name:
-        type: string
-    steps:
-      # git pull
-      - checkout:
-          path: ~/spring-petclinic-msa
-
-      - setup_remote_docker
-
-      - run:
-          name: Login to Dockerhub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - << parameters.service-name >>-{{ checksum "pom.xml"}}
-
-      - run: mvn dependency:go-offline
-
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: << parameters.service-name >>-{{ checksum "pom.xml"}}
-
-      # package into a jar and build image
-      - run: mvn clean package -Ddocker.image.tag=Build-${CIRCLE_BUILD_NUM}-CI -Ddockerfile.maven.settings.auth=false
-
-      # push docker image to docker hub
-      - run: mvn dockerfile:push -Ddocker.image.tag=Build-${CIRCLE_BUILD_NUM}-CI
-
-      # store raw content of src code
-      - store_artifacts:
-          path: target/classes
-          destination: spring-petclinic-<< parameters.service-name >>
+      - run: echo " web-app"
