@@ -24,7 +24,6 @@ jobs:
       - image: circleci/openjdk:8u242-jdk
     working_directory: ~/spring-petclinic-msa/cloud-gateway
     steps:
-      - run: echo 'cloud-gateway!'
       - build-service:
           service-name: "cloud-gateway"
   customers-service:
@@ -32,7 +31,6 @@ jobs:
       - image: circleci/openjdk:8u242-jdk
     working_directory: ~/spring-petclinic-msa/customers-service
     steps:
-      - run: echo 'customers-service!'
       - build-service:
           service-name: "customers-service"
   vets-service:
@@ -40,7 +38,6 @@ jobs:
       - image: circleci/openjdk:8u242-jdk
     working_directory: ~/spring-petclinic-msa/vets-service
     steps:
-      - run: echo 'vets-service!'
       - build-service:
           service-name: "vets-service"
   visits-service:
@@ -48,7 +45,6 @@ jobs:
       - image: circleci/openjdk:8u242-jdk
     working_directory: ~/spring-petclinic-msa/visits-service
     steps:
-      - run: echo 'visits-service!'
       - build-service:
           service-name: "visits-service"
   web-app:
@@ -56,7 +52,6 @@ jobs:
       - image: circleci/openjdk:8u242-jdk
     working_directory: ~/spring-petclinic-msa/web-app
     steps:
-      - run: echo 'web-app!'
       - build-service:
           service-name: "web-app"
 
